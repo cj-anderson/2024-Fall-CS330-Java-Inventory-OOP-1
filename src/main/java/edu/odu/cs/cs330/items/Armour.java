@@ -46,7 +46,13 @@ public class Armour extends Item {
      */
     public Armour()
     {
-        // Initialize all data members (including those inherited from Item)
+       super("", false);
+       this.durability = 0;
+       this.defense = 0;
+       this.material = "";
+       this.modifier = "";
+       this.modiferLevel = 0;
+       this.element = "";
     }
 
     /**
@@ -56,7 +62,13 @@ public class Armour extends Item {
      */
     public Armour(Armour src)
     {
-        // Set and/or copy data members for *this* object based on *src*.
+        super(src.getName(), false);
+        this.durability = src.getDurability();
+        this.defense = src.getDefense();
+        this.material = src.getMaterial();
+        this.modifier = src.getModifier();
+        this.modiferLevel = src.getModifierLevel();
+        this.element = src.getElement();
     }
 
     /**
@@ -190,9 +202,15 @@ public class Armour extends Item {
     public void read(Scanner snr)
     {
         super.name   = snr.next();
-
-        // Complete this method
+        super.stackable = false;
+        this.material = snr.next();
+        this.durability = Integer.parseInt(snr.next());
+        this.defense = Integer.parseInt(snr.next());
+        this.modifier = snr.next();
+        this.modiferLevel = Integer.parseInt(snr.next());
+        this.element = snr.next();
     }
+        
 
     /**
      * Clone--i.e., copy--this Armour.
@@ -201,7 +219,7 @@ public class Armour extends Item {
     public Item clone()
     {
         // Replace the next line
-        return null;
+        return new Armour(this);
     }
 
     /**
@@ -210,7 +228,12 @@ public class Armour extends Item {
     @Override
     public String toString()
     {
-        return "Implement This Function";
+        return "  Nme: " + this.getName() +"\n"
+        + "  Dur: " + this.getDurability() +"\n"
+        + "  Def: " + this.getDefense() + "\n"
+        + "  Mtl: " + this.getMaterial() +"\n"
+        + "  Mdr: " + this.getModifier() + " (Lvl " + this.getModifierLevel() +")\n"
+        + "  Emt: " + this.getElement() + "\n";
     }
 }
 
